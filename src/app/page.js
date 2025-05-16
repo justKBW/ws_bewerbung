@@ -1,11 +1,12 @@
 import { Header } from "../app/components/header/header";
+import { Footer } from "../app/components/footer/footer";
 
 export default function Home() {
   return (
     <div>
       <Header />
-      {/*<Body />
-      <Footer />*/}
+      {/*<Body />*/}
+      <Footer />
     </div>
   );
 }
