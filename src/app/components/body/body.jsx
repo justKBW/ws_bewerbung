@@ -6,26 +6,28 @@ import { useState } from "react";
 const chuckUrl = "https://api.chucknorris.io/jokes/random";
 
 export function Body() {
-  const [joke, setJoke] = useState();
-  const fetchJoke = async () => {
-    let apidata = await fetch(chuckUrl)
+  const [joke, setJoke] = useState(fetchJoke);
+
+  function fetchJoke() {
+    let apidata = fetch(chuckUrl)
       .then((apiResponse) => apiResponse.json())
       .then((apiResponse) => {
         console.log(apiResponse);
         const joke = apiResponse.value;
-        console.log(joke);
+        console.log("Joke:", joke);
         setJoke(joke);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error("Fetching error:", error);
       });
-  };
+  }
 
   return (
     <div id="body-main" className="grid grid-cols-5 grid-rows-3 m-4">
-      <div id="body-picture" className="col-span-2 row-span-3">
+      <div id="body-picture" className="col-span-2 row-span-3 ">
         <Image
           src={"/images/landscape.jpg"}
+          className="rounded-xl"
           width={4096}
           height={1815}
           alt="Picture of a landscape in the evening"
@@ -45,10 +47,11 @@ export function Body() {
         </button>
       </div>
 
-      <div id="body-joke">
-        <p id="joke" className="col-span-3 row-span-2 m-auto">
-          {joke}
-        </p>
+      <div
+        id="body-joke"
+        className="col-span-3 row-span-2 m-auto border-2 border-blue-500 border-double rounded-lg p-16 mx-8 text-center"
+      >
+        <p id="joke">{joke}</p>
       </div>
     </div>
   );
