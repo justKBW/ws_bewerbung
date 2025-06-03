@@ -1,9 +1,8 @@
 import prisma from "../../../../lib/prisma";
 
 export async function Footer() {
-  //Showing view count
-  const views = await prisma.counter.findUnique({ where: { id: "ws" } });
-  console.log(views);
+  const oldviews = await prisma.counter.findUnique({ where: { id: "ws" } });
+  console.log("Old views", oldviews);
 
   //Updating view count
   const updateCounter = await prisma.counter.update({
@@ -16,7 +15,11 @@ export async function Footer() {
       },
     },
   });
-  console.log(updateCounter);
+  console.log("New views", updateCounter);
 
-  return <div className=" text-blue-500 ">{views.views}</div>;
+  return (
+    <div className=" absolute inset-x-0 bottom-0 text-xl text-blue-500 text-center ">
+      <p>Besuche: {updateCounter.views}</p>
+    </div>
+  );
 }
