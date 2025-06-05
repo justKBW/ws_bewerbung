@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-const chuckUrl = "https://api.chucknorris.io/jokes/random";
+const chuckUrl = "https://api.chucknorris.io/jokes/random?category=dev";
 
 export function Body() {
   const [joke, setJoke] = useState(fetchJoke);
